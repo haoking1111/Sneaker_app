@@ -49,6 +49,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       appBar: AppBar(
         backgroundColor: Colors.grey[600],
         elevation: 0,
+        title: Text('Forgot Password'),
+        centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +60,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             child: Text(
               'Enter Your Email and we will send you a password reset link',
               style: TextStyle(
-                fontSize: 20
+                fontSize: 20,
+                fontWeight: FontWeight.bold
               ),
               textAlign: TextAlign.center,
             ),
@@ -89,7 +92,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
           SizedBox(height: 10,),
 
-          MaterialButton(onPressed:passwordReset,
+          MaterialButton(
+            onPressed:passwordReset,
             child: Text('Reset Password', style: TextStyle(color: Colors.white),),
             color: Colors.grey[900],
 

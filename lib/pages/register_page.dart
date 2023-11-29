@@ -30,12 +30,25 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
+    //loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+    );
+
     if (passwordConfirm()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
     }
+
+    // pop loading circle
+    Navigator.of(context).pop();
   }
 
   bool passwordConfirm() {
