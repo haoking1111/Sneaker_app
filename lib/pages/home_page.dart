@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/components/bottom_nav_bar.dart';
 import 'package:sneaker_app/pages/shop_page.dart';
@@ -120,17 +121,22 @@ class _HomePageState extends State<HomePage> {
             ),
 
             //Logout
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25.0, bottom: 25.0),
-              child: ListTile(
-                leading: Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  'Logout',
-                  style: TextStyle(
-                      color: Colors.white
+              child: GestureDetector(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                },
+                child: ListTile(
+                  leading: Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
                   ),
                 ),
               ),
