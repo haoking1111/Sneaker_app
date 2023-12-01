@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sneaker_app/global/common/toast.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -38,18 +39,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           return AlertDialog(
             content: Text(e.message.toString()),
           );
-      },);
+        },);
     }
   }
+  //Password reset link sent! Check your email
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        backgroundColor: Colors.grey[600],
+        backgroundColor: Colors.grey[900],
         elevation: 0,
-        title: Text('Forgot Password'),
+        title: Text('Forgot Password',style: TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
       body: Column(

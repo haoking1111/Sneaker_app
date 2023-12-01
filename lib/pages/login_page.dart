@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sneaker_app/global/common/toast.dart';
 
 import 'forgot_pasword_page.dart';
 
@@ -33,10 +34,21 @@ class _LoginPageState extends State<LoginPage> {
         },
     );
 
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-    );
+      );
+    } on FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      switch (e.code) {
+        case "invalid-credential":
+          showToast(message: 'Wrong account or password');
+        case "invalid-email":
+          showToast(message: 'The email address is badly formatted');
+      }
+    }
 
     //pop loading circle
     Navigator.of(context).pop();
@@ -53,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -159,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                             'Forgot Password?',
                           style: TextStyle(
-                              color: Colors.blue,
+                              color: Colors.grey[650],
                               fontWeight: FontWeight.bold
                           ),
                         ),

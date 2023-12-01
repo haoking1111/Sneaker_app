@@ -21,7 +21,6 @@ class _CartItemState extends State<CartItem>{
   //remove item from cart
   void removeItemFromCart() {
     Provider.of<Cart>(context, listen: false).removeItemFromCart(widget.shoe);
-
   }
 
   @override

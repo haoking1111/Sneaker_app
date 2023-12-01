@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sneaker_app/global/common/toast.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -40,11 +41,26 @@ class _RegisterPageState extends State<RegisterPage> {
         },
     );
 
-    if (passwordConfirm()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
+    try {
+      if (passwordConfirm()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+      } else {
+        showToast(message: 'Confirm password was wrong !');
+      }
+    } on FirebaseAuthException catch (e) {
+      // print('Failed with error code: ${e.code}');
+      // print(e.message);
+      switch (e.code) {
+        case 'email-already-in-use':
+          showToast(message: 'The email address is already in use by another account');
+          break;
+        case 'invalid-email':
+          showToast(message: 'Your email address appears to be incorrect');
+          break;
+      }
     }
 
     // pop loading circle
@@ -62,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -187,7 +203,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: signUp,
+                    onTap: () {
+                      signUp();
+                      showToast(message: 'Successfully sign up');
+                    },
                     child: Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(

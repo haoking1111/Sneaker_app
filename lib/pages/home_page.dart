@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/components/bottom_nav_bar.dart';
+import 'package:sneaker_app/global/common/toast.dart';
+import 'package:sneaker_app/pages/account_page.dart';
 import 'package:sneaker_app/pages/shop_page.dart';
 import 'cart_page.dart';
 
@@ -33,6 +35,9 @@ class _HomePageState extends State<HomePage> {
 
     // cart page
     CartPage(),
+
+    // account page
+    AccountPage(),
   ];
 
   @override
@@ -126,6 +131,7 @@ class _HomePageState extends State<HomePage> {
               child: GestureDetector(
                 onTap: () {
                   FirebaseAuth.instance.signOut();
+                  showToast(message: 'Successfully signed out');
                 },
                 child: ListTile(
                   leading: Icon(
