@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,17 +43,32 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     try {
+      //create user
       if (passwordConfirm()) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
+
+        // add user details
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(userCredential.user!.email)
+            .set({
+              'username' : _emailController.text.split('@')[0],
+              'birthdate' : '',
+              'phonenumber' : '',
+              'emailaddress' : _emailController.text.trim(),
+              'address' : '',
+            });
+
       } else {
         showToast(message: 'Confirm password was wrong !');
       }
     } on FirebaseAuthException catch (e) {
-      // print('Failed with error code: ${e.code}');
-      // print(e.message);
+      print('Failed with error code: ${e.code}');
+      print(e.message);
       switch (e.code) {
         case 'email-already-in-use':
           showToast(message: 'The email address is already in use by another account');

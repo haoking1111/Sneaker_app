@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
 import 'forgot_pasword_page.dart';
@@ -35,10 +38,14 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
+      // Đăng nhập thành công, thêm thông tin người dùng vào Firestore
+      await addUserInfoToFirestore(userCredential.user!);
+
     } on FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
       print(e.message);
@@ -52,6 +59,55 @@ class _LoginPageState extends State<LoginPage> {
 
     //pop loading circle
     Navigator.of(context).pop();
+  }
+
+  Future signingWithGoogle() async {
+    //loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+       if(GoogleSignInAccount != null) {
+         final GoogleSignInAuthentication? googleSignInAuthentication = await
+             googleSignInAccount?.authentication;
+
+         final AuthCredential credential = GoogleAuthProvider.credential(
+           idToken: googleSignInAuthentication?.idToken,
+           accessToken: googleSignInAuthentication?.accessToken,
+         );
+
+         UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+         // Đăng nhập thành công, thêm thông tin người dùng vào Firestore
+         await addUserInfoToFirestore(userCredential.user!);
+       }
+    } catch (e) {
+      showToast(message: 'Error');
+    }
+
+    //pop loading circle
+    Navigator.of(context).pop();
+  }
+
+  Future addUserInfoToFirestore(User user) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email)
+        .set({
+      'username': user.email!.split('@')[0],
+      'birthdate': '',
+      'phonenumber': '',
+      'emailaddress': user.email,
+      'address': '',
+    });
   }
 
   @override
@@ -74,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
           
                 //Logo nike
-                Image.asset('assets/images/nike.png', height: 270),
+                Image.asset('assets/images/nike.png', height: 270,),
           
                 //Hello Again !!!
                 Text(
@@ -171,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                             'Forgot Password?',
                           style: TextStyle(
-                              color: Colors.grey[650],
+                              color: Colors.grey[700],
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -201,6 +257,43 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 18
                           ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 10,),
+
+                //sign in button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: GestureDetector(
+                    onTap: signingWithGoogle,
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Icon google
+                            Icon(FontAwesomeIcons.google, color: Colors.white,),
+
+                            SizedBox(width: 5,),
+
+                            Text(
+                              'Sign in with Google',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18
+                              ),
+                            ),
+                          ]
                         ),
                       ),
                     ),

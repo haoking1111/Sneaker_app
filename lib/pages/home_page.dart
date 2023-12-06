@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/components/bottom_nav_bar.dart';
 import 'package:sneaker_app/global/common/toast.dart';
@@ -7,7 +9,7 @@ import 'package:sneaker_app/pages/shop_page.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -39,6 +41,9 @@ class _HomePageState extends State<HomePage> {
     // account page
     AccountPage(),
   ];
+
+  //user
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +85,50 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Divider(
-                    color: Colors.grey[800],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                //   child: Divider(
+                //     color: Colors.grey[800],
+                //   ),
+                // ),
 
                 // other page
+
+                Padding(
+                  padding: EdgeInsets.only(left: 25.0),
+                  child: StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('users')  // Đảm bảo rằng bạn sử dụng tên collection đúng
+                        .doc(FirebaseAuth.instance.currentUser!.email)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        // Lấy dữ liệu từ snapshot
+                        final userData = snapshot.data!.data() as Map<String, dynamic>;
+
+                        // Lấy giá trị của trường "username"
+                        final username = userData['username'];
+
+                        return ListTile(
+                          leading: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            username,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        return CircularProgressIndicator();  // Hiển thị thanh loading khi đang lấy dữ liệu
+                      }
+                    },
+                  ),
+                ),
 
                 // Home
                 const Padding(
@@ -130,7 +171,14 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(left: 25.0, bottom: 25.0),
               child: GestureDetector(
                 onTap: () {
-                  FirebaseAuth.instance.signOut();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Center(child: CircularProgressIndicator());
+                    },
+                  );
+                  Future.delayed(Duration(seconds: 1), () { FirebaseAuth.instance.signOut();});
+                  // FirebaseAuth.instance.signOut();
                   showToast(message: 'Successfully signed out');
                 },
                 child: ListTile(

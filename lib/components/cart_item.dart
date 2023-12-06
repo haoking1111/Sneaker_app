@@ -34,7 +34,18 @@ class _CartItemState extends State<CartItem>{
       child: ListTile(
         leading: Image.asset(widget.shoe.imagePath),
         title: Text(widget.shoe.name),
-        subtitle: Text('\$' + widget.shoe.price),
+        subtitle: Row(
+          children: [
+            // price
+            Text('\$' + widget.shoe.price),
+
+            SizedBox(width: 70,),
+
+            //quantity
+            Text('x' + (widget.shoe.quantity.toString())),
+
+          ],
+        ),
         trailing: IconButton(
           icon: Icon(Icons.delete, color: Colors.grey[800],),
           onPressed: removeItemFromCart,

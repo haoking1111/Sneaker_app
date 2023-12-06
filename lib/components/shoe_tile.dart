@@ -29,6 +29,8 @@ class ShoeTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
               shoe.description,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
               style: TextStyle(color: Colors.grey[600]),
               textAlign: TextAlign.center,
             ),

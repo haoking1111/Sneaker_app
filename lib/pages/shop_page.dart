@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/models/shoe.dart';
+import 'package:sneaker_app/pages/product_detail_page.dart';
 import '../components/shoe_tile.dart';
+import 'other_products_page.dart';
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({super.key});
+  ShopPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -14,22 +16,22 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-  
+  Shoe? selectedShoe;
+
   //add shoe to cart
   void addShoeToCart(Shoe shoe) {
     Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
-    
+
     // alert the user, shoe successfully added
     showDialog(
-      context: context, 
+      context: context,
       builder: (context) => AlertDialog(
         title: Text('Successfully added!'),
         content: Text('Check your cart'),
       ),
     );
   }
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(builder: (context, value, child) => Column(
@@ -71,7 +73,7 @@ class _ShopPageState extends State<ShopPage> {
         ),
 
         // hot picks
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,10 +83,16 @@ class _ShopPageState extends State<ShopPage> {
                 'Hot Picks 🔥',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
-              Text(
-                'See all',
-                style: TextStyle(color: Colors.blue),
-              )
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProductsPage(),));
+                },
+                child: Text(
+                  'See all',
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+              ),
             ],
           ),
         ),
@@ -93,7 +101,7 @@ class _ShopPageState extends State<ShopPage> {
         //list of shoe for sale
         Expanded(
           child: ListView.builder(
-            itemCount: 6,
+            itemCount: value.getShoeList().length,
             scrollDirection: Axis.horizontal, // lướt theo chiều ngang
             itemBuilder: (context, index) {
 
@@ -101,9 +109,27 @@ class _ShopPageState extends State<ShopPage> {
               Shoe shoe = value.getShoeList()[index];
 
               // return the shoe
-              return ShoeTile(
-                shoe: shoe,
-                onTap: () => addShoeToCart(shoe),
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedShoe = shoe;
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetailPage(shoe: shoe),
+                    ),
+                  );
+                },
+                child: ShoeTile(
+                  shoe: shoe,
+                  onTap: () {
+                    setState(() {
+                      selectedShoe = shoe;
+                    });
+                    addShoeToCart(shoe);
+                  }
+                ),
               );
             },
           ),

@@ -40,12 +40,25 @@ dependencies:
   provider:
   firebase_core: ^2.24.0
   firebase_auth: ^4.15.0
+  cloud_firestore: ^4.13.3
   fluttertoast: ^8.2.4
+  font_awesome_flutter: ^10.6.0
+  google_sign_in: ^6.1.6
+  flutter_native_splash: ^2.3.6
+
+#flutter_native_splash:
+#  android: true
+#  image: assets/nike.png
+#  color: "#000000"
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -53,7 +66,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/nike_splash.png
 
+#  android_12:
+#    color: "#ffffff"
+#    image: assets/nike_splash.png
+#    image: assets/nike_splash.png
+#    icon_background_color: "#ffffff"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -67,6 +88,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+     - assets/nike.png
+     - assets/nike_splash.png
      - assets/images/nike.png
      - assets/images/Jordan1.png
      - assets/images/NikeAirForce1.png
@@ -75,6 +98,12 @@ flutter:
      - assets/images/JBalvinxAirJordan1High.png
      - assets/images/NikeAirMaxScorpionFlyknit.png
      - assets/images/NikeAirMax90.png
+     - assets/images/JordanmensSneaker.png
+     - assets/images/NikeAirMax.png
+     - assets/images/NikeAirMaxFlyknit.png
+     - assets/images/NikeUnisex.png
+     - assets/images/NikeWomenFitness.png
+     - assets/images/NikeWomenSneaker.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
