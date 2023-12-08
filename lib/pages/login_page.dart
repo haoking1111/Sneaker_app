@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sneaker_app/global/common/button_lr.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
+import '../global/common/text_field.dart';
 import 'forgot_pasword_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       // Đăng nhập thành công, thêm thông tin người dùng vào Firestore
-      await addUserInfoToFirestore(userCredential.user!);
+      // await addUserInfoToFirestore(userCredential.user!);
 
     } on FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
@@ -91,23 +93,32 @@ class _LoginPageState extends State<LoginPage> {
        }
     } catch (e) {
       showToast(message: 'Error');
+    } finally {
+      //pop loading circle
+      Navigator.of(context).pop();
     }
-
-    //pop loading circle
-    Navigator.of(context).pop();
   }
 
   Future addUserInfoToFirestore(User user) async {
-    await FirebaseFirestore.instance
+    // Kiểm tra xem thông tin người dùng đã tồn tại trong Firestore hay chưa
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
         .collection("users")
         .doc(user.email)
-        .set({
-      'username': user.email!.split('@')[0],
-      'birthdate': '',
-      'phonenumber': '',
-      'emailaddress': user.email,
-      'address': '',
-    });
+        .get();
+
+    // Nếu thông tin người dùng chưa tồn tại, thì thêm mới vào Firestore
+    if (!userDoc.exists) {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.email)
+          .set({
+        'username': user.email!.split('@')[0],
+        'birthdate': '',
+        'phonenumber': '',
+        'emailaddress': user.email,
+        'address': '',
+      });
+    }
   }
 
   @override
@@ -152,63 +163,12 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 30,),
           
                 //email textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(12)
-                        ),
-                        hintText: 'Email',
-                        fillColor: Colors.grey[200],
-                        filled: true,
-                      ),
-                    ),
-                    ),
-                  ),
+                textFieldLR(_emailController, 'Email', false),
           
                 SizedBox(height: 15,),
           
                 //password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: TextField(
-                      obscureText: true,
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(12)
-                        ),
-                        hintText: 'Password',
-                        fillColor: Colors.grey[200],
-                        filled: true,
-                      ),
-                    ),
-                  ),
-                ),
+                textFieldLR(_passwordController, 'Password', true),
 
                 SizedBox(height: 10,),
 
@@ -239,33 +199,11 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 10,),
           
                 //sign in button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    onTap: signIn,
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Colors.grey[900],
-                        borderRadius: BorderRadius.circular(12)
-                      ),
-                      child: Center(
-                        child: Text(
-                            'Sign In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                buttonLR(() => signIn(), 'Sign In'),
 
                 SizedBox(height: 10,),
 
-                //sign in button
+                //sign in with gg button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
@@ -324,7 +262,6 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 )
-          
               ],
             ),
           ),

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sneaker_app/global/common/button_lr.dart';
+import 'package:sneaker_app/global/common/text_field.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -124,124 +126,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 30,),
 
                 //email textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(12)
-                        ),
-                        hintText: 'Email',
-                        fillColor: Colors.grey[200],
-                        filled: true,
-                      ),
-                    ),
-                  ),
-                ),
+                textFieldLR(_emailController, 'Email', false),
 
                 SizedBox(height: 15,),
 
                 //password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: TextField(
-                      obscureText: true,
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(12)
-                        ),
-                        hintText: 'Password',
-                        fillColor: Colors.grey[200],
-                        filled: true,
-                      ),
-                    ),
-                  ),
-                ),
+                textFieldLR(_passwordController, 'Password', true),
 
                 SizedBox(height: 15,),
 
                 //confirm password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: TextField(
-                      obscureText: true,
-                      controller: _confirmPasswordController,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(12)
-                        ),
-                        hintText: 'Confirm Password',
-                        fillColor: Colors.grey[200],
-                        filled: true,
-                      ),
-                    ),
-                  ),
-                ),
+                textFieldLR(_confirmPasswordController, 'Confirm Password', true),
 
                 SizedBox(height: 15,),
 
-                //sign in button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      signUp();
-                      showToast(message: 'Successfully sign up');
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Colors.grey[900],
-                          borderRadius: BorderRadius.circular(12)
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                //sign up button
+                buttonLR(() => signUp(), 'Sign Up'),
 
                 SizedBox(height: 20,),
 

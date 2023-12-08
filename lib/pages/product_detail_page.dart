@@ -16,9 +16,6 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   int quantity = 1;
 
-  // alert the user, shoe successfully added
-
-
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(builder: (context, value, child) =>
@@ -29,6 +26,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+
                   // img product
                   Image.asset(
                     widget.shoe.imagePath,
@@ -36,6 +34,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         .of(context)
                         .size
                         .width / 1.2,
+                    height: 300,
                   ),
 
                   // Text('Name: ${shoe.name}'),
@@ -140,6 +139,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   ],
                                 ),
                               ),
+
+                              // price
                               Text(
                                 '\$ ${widget.shoe.price}',
                                 style: TextStyle(

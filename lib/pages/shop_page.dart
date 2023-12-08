@@ -34,112 +34,108 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Cart>(builder: (context, value, child) => Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(left: 10),
-          margin: EdgeInsets.symmetric(horizontal: 25.0),
-          decoration: BoxDecoration(
-              color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
-          // child: const Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     // Text(
-          //     //   'Search',
-          //     //   style: TextStyle(color: Colors.grey),
-          //     // ),
-          //     // Icon(
-          //     //   Icons.search,
-          //     //   color: Colors.grey,
-          //     // )
-          //   ],
-          // ),
-          child: TextField(
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.grey[600], fontSize: 15),
-              icon: Icon(Icons.search, size: 20,),
-
-            ),
-
-          ),
-        ),
-
-        // message
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          // child: Text('Everyone files... some fly loger than other'),
-        ),
-
-        // hot picks
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                'Hot Picks 🔥',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-              ),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => OtherProductsPage(),));
-                },
-                child: Text(
-                  'See all',
-                  style: TextStyle(color: Colors.blueAccent),
+    return Consumer<Cart>(
+      builder: (context, value, child) => Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            margin: EdgeInsets.symmetric(horizontal: 25.0),
+            decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8)),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Search',
+                hintStyle: TextStyle(color: Colors.grey[600], fontSize: 15),
+                icon: Icon(
+                  Icons.search,
+                  size: 20,
                 ),
               ),
-            ],
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
 
-        //list of shoe for sale
-        Expanded(
-          child: ListView.builder(
-            itemCount: value.getShoeList().length,
-            scrollDirection: Axis.horizontal, // lướt theo chiều ngang
-            itemBuilder: (context, index) {
+          // message
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            // child: Text('Everyone files... some fly loger than other'),
+          ),
 
-              // get a shoe from list
-              Shoe shoe = value.getShoeList()[index];
+          // hot picks
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Hot Picks🔥',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            OtherProductsPage(shoeList: value.getShoeList()),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'See all',
+                    style: TextStyle(color: Colors.blueAccent),
+                  ),
+                ),
+              ],
+            ),
+          ),
 
-              // return the shoe
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedShoe = shoe;
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductDetailPage(shoe: shoe),
-                    ),
-                  );
-                },
-                child: ShoeTile(
-                  shoe: shoe,
+          const SizedBox(height: 10),
+
+          //list of shoe for sale
+          Expanded(
+            child: ListView.builder(
+              itemCount: 6,
+              scrollDirection: Axis.horizontal, // lướt theo chiều ngang
+              itemBuilder: (context, index) {
+                // get a shoe from list
+                Shoe shoe = value.getShoeList()[index];
+
+                // return the shoe
+                return GestureDetector(
                   onTap: () {
                     setState(() {
                       selectedShoe = shoe;
                     });
-                    addShoeToCart(shoe);
-                  }
-                ),
-              );
-            },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDetailPage(shoe: shoe),
+                      ),
+                    );
+                  },
+                  child: ShoeTile(
+                      shoe: shoe,
+                      onTap: () {
+                        setState(() {
+                          selectedShoe = shoe;
+                        });
+                        addShoeToCart(shoe);
+                      }),
+                );
+              },
+            ),
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
-          child: Divider(color: Colors.white,),
-        )
-      ],
-    ),
+          const Padding(
+            padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
+            child: Divider(
+              color: Colors.white,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -2,13 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/components/text_box.dart';
+import 'package:sneaker_app/global/common/logout.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
 import 'change_password_page.dart';
 
 class AccountPage extends StatefulWidget {
-  const AccountPage({super.key});
-
   @override
   State<AccountPage> createState() => _AccountPageState();
 }
@@ -174,8 +173,6 @@ class _AccountPageState extends State<AccountPage> {
                 },
               ),
 
-
-
               // change password
               MyTextBox(
                   text: '*********',
@@ -183,16 +180,35 @@ class _AccountPageState extends State<AccountPage> {
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ChangPassWordPage(),));
                   },
-              )
+              ),
 
-              //change password
-              // MyTextBox(
-              //   text: userData['address'],
-              //   sectionName: 'Address',
-              //   onPressed: () {
-              //     editField('address');
-              //   },
-              // ),
+              const Padding(
+                padding: EdgeInsets.only(top: 20.0, left: 25.0, right: 25.0),
+                child: Divider(color: Colors.white,),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(right: 20, left: 35, bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                        'Logout',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+
+                    IconButton(
+                        onPressed: () {
+                          logout(context);
+                        },
+                        icon: Icon(Icons.logout,)
+                    ),
+                  ],
+                ),
+              ),
             ],
           );
         } else if (snapshot.hasError) {

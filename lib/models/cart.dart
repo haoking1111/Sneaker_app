@@ -52,6 +52,55 @@ class Cart extends ChangeNotifier{
         imagePath: 'assets/images/NikeAirMaxScorpionFlyknit.png'
     ),
 
+    // other products
+    Shoe(
+        name: 'Jordan Mens Sneaker',
+        price: '351',
+        quantity: 1,
+        description: 'The Triple Black Nike Air Max Scorpion FK sneaker showcases a sleek, all-black Flyknit upper that offers a sock-like fit, providing unparalleled comfort and flexibility. Its Triple Black colorway exudes a sophisticated and modern aesthetic.',
+        imagePath: 'assets/images/JordanmensSneaker.png'
+    ),
+
+    Shoe(
+        name: 'Nike Air Max',
+        price: '874',
+        quantity: 1,
+        description: 'The Triple Black Nike Air Max Scorpion FK sneaker showcases a sleek, all-black Flyknit upper that offers a sock-like fit, providing unparalleled comfort and flexibility. Its Triple Black colorway exudes a sophisticated and modern aesthetic.',
+        imagePath: 'assets/images/NikeAirMax.png'
+    ),
+
+    Shoe(
+        name: 'Nike Air Max Flyknit',
+        price: '555',
+        quantity: 1,
+        description: 'The Triple Black Nike Air Max Scorpion FK sneaker showcases a sleek, all-black Flyknit upper that offers a sock-like fit, providing unparalleled comfort and flexibility. Its Triple Black colorway exudes a sophisticated and modern aesthetic.',
+        imagePath: 'assets/images/NikeAirMaxFlyknit.png'
+    ),
+
+    Shoe(
+        name: 'Nike Unisex',
+        price: '381',
+        quantity: 1,
+        description: 'The Triple Black Nike Air Max Scorpion FK sneaker showcases a sleek, all-black Flyknit upper that offers a sock-like fit, providing unparalleled comfort and flexibility. Its Triple Black colorway exudes a sophisticated and modern aesthetic.',
+        imagePath: 'assets/images/NikeUnisex.png'
+    ),
+
+    Shoe(
+        name: 'Nike Women Fitness',
+        price: '482',
+        quantity: 1,
+        description: 'The Triple Black Nike Air Max Scorpion FK sneaker showcases a sleek, all-black Flyknit upper that offers a sock-like fit, providing unparalleled comfort and flexibility. Its Triple Black colorway exudes a sophisticated and modern aesthetic.',
+        imagePath: 'assets/images/NikeWomenFitness.png'
+    ),
+
+    Shoe(
+        name: 'Nike Women Sneaker',
+        price: '230',
+        quantity: 1,
+        description: 'The Triple Black Nike Air Max Scorpion FK sneaker showcases a sleek, all-black Flyknit upper that offers a sock-like fit, providing unparalleled comfort and flexibility. Its Triple Black colorway exudes a sophisticated and modern aesthetic.',
+        imagePath: 'assets/images/NikeWomenSneaker.png'
+    ),
+
   ];
 
   // list of items in user cart

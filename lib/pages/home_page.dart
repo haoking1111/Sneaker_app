@@ -6,6 +6,7 @@ import 'package:sneaker_app/components/bottom_nav_bar.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 import 'package:sneaker_app/pages/account_page.dart';
 import 'package:sneaker_app/pages/shop_page.dart';
+import '../global/common/logout.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,7 +55,6 @@ class _HomePageState extends State<HomePage> {
           navigateBottomBar(index);
         },
       ),
-
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -65,9 +65,11 @@ class _HomePageState extends State<HomePage> {
               },
               icon: const Padding(
                 padding: EdgeInsets.only(left: 12.0),
-                child: Icon(Icons.menu, color: Colors.black,),
-              )
-          ),
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                ),
+              )),
         ),
       ),
       drawer: Drawer(
@@ -84,84 +86,45 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                 ),
-
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                //   child: Divider(
-                //     color: Colors.grey[800],
-                //   ),
-                // ),
-
-                // other page
-
+                
                 Padding(
                   padding: EdgeInsets.only(left: 25.0),
                   child: StreamBuilder<DocumentSnapshot>(
                     stream: FirebaseFirestore.instance
-                        .collection('users')  // Đảm bảo rằng bạn sử dụng tên collection đúng
+                        .collection(
+                            'users') // Đảm bảo rằng bạn sử dụng tên collection đúng
                         .doc(FirebaseAuth.instance.currentUser!.email)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         // Lấy dữ liệu từ snapshot
-                        final userData = snapshot.data!.data() as Map<String, dynamic>;
+                        final userData =
+                            snapshot.data!.data() as Map<String, dynamic>;
 
                         // Lấy giá trị của trường "username"
                         final username = userData['username'];
 
-                        return ListTile(
-                          leading: Icon(
-                            Icons.person,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            username,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        );
+                        return listTitleDrawer(Icons.person, username);
+
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else {
-                        return CircularProgressIndicator();  // Hiển thị thanh loading khi đang lấy dữ liệu
+                        return CircularProgressIndicator(); // Hiển thị thanh loading khi đang lấy dữ liệu
                       }
                     },
                   ),
                 ),
 
                 // Home
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 25.0),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'Home',
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                  ),
+                  child: listTitleDrawer(Icons.home, 'Home'),
                 ),
 
                 // About
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 25.0),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.info_rounded,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'About',
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                  ),
+                  child: listTitleDrawer(Icons.info_rounded, 'About'),
                 ),
               ],
             ),
@@ -171,28 +134,9 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(left: 25.0, bottom: 25.0),
               child: GestureDetector(
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return Center(child: CircularProgressIndicator());
-                    },
-                  );
-                  Future.delayed(Duration(seconds: 1), () { FirebaseAuth.instance.signOut();});
-                  // FirebaseAuth.instance.signOut();
-                  showToast(message: 'Successfully signed out');
+                  logout(context);
                 },
-                child: ListTile(
-                  leading: Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Logout',
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
-                  ),
-                ),
+                child: listTitleDrawer(Icons.logout, 'Logout')
               ),
             ),
           ],
@@ -201,5 +145,17 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_selectedIndex],
     );
   }
-}
 
+  Widget listTitleDrawer(IconData nameIcon, String name) {
+    return ListTile(
+      leading: Icon(
+        nameIcon,
+        color: Colors.white,
+      ),
+      title: Text(
+        name,
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+}

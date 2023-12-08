@@ -32,7 +32,7 @@ class _CartItemState extends State<CartItem>{
       ),
       margin: EdgeInsets.only(bottom: 10),
       child: ListTile(
-        leading: Image.asset(widget.shoe.imagePath),
+        leading: Image.asset(widget.shoe.imagePath,width: 60, height: 60,),
         title: Text(widget.shoe.name),
         subtitle: Row(
           children: [

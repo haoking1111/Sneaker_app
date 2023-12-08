@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sneaker_app/global/common/text_field.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 import 'package:sneaker_app/pages/login_page.dart';
 
@@ -69,29 +70,8 @@ class _ChangPassWordPageState extends State<ChangPassWordPage> {
 
             //currentPassword textfield
             Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12)),
-                child: TextField(
-                  obscureText: true,
-                  controller: _currentPasswordController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(12)),
-                    hintText: 'Current Password',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
+              padding: const EdgeInsets.only(top: 25),
+              child: textFieldLR(_currentPasswordController, 'Current Password', true),
             ),
 
             SizedBox(
@@ -99,31 +79,7 @@ class _ChangPassWordPageState extends State<ChangPassWordPage> {
             ),
 
             //newPassword textfield
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12)),
-                child: TextField(
-                  obscureText: true,
-                  controller: _newPasswordController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(12)),
-                    hintText: 'New Password',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-            ),
+            textFieldLR(_newPasswordController, 'New Password', true),
 
             SizedBox(
               height: 15,
