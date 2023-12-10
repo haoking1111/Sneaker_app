@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/global/common/text_field.dart';
+import 'package:sneaker_app/global/common/text_field_lr.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 import 'package:sneaker_app/pages/login_page.dart';
 

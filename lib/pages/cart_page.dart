@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sneaker_app/global/common/loading_p.dart';
 import 'package:sneaker_app/models/cart.dart';
+import 'package:sneaker_app/pages/payment_method_page.dart';
 
 import '../components/cart_item.dart';
 import '../models/shoe.dart';
 
 class CartPage extends StatelessWidget {
+
+  //calculator total price
+  double calculateTotal(List<Shoe> cartItems) {
+    double total = 0;
+    for (var item in cartItems) {
+      double price = double.parse(item.price);
+      int quantity = item.quantity; // Assuming each Shoe has a 'quantity' property
+      total += price * quantity;
+    }
+    return total;
+  }
+
   const CartPage({super.key});
 
   @override
@@ -36,11 +50,16 @@ class CartPage extends StatelessWidget {
                 },
                 )
             ),
+
+            const Padding(
+              padding: EdgeInsets.only(top: 20.0, left: 25.0, right: 25.0),
+              child: Divider(color: Colors.white,),
+            ),
             
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('Total: ', style: TextStyle(fontSize: 20),),
+                Text('Total: ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
 
                 Text(
                   '\$${calculateTotal(value.getUserCart()).toStringAsFixed(2)}',
@@ -49,28 +68,24 @@ class CartPage extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 15,),
             
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(13)
+            GestureDetector(
+              onTap: () {
+                loadingPage(context, PaymentMethodPage());
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                decoration: BoxDecoration(
+                  color: Colors.grey[900],
+                  borderRadius: BorderRadius.circular(13)
+                ),
+                child: Center(child: Text('Pay Now', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),)),
               ),
-              child: Center(child: Text('Pay Now', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),)),
             )
           ],
         ),
       ),
     );
-  }
-  double calculateTotal(List<Shoe> cartItems) {
-    double total = 0;
-    for (var item in cartItems) {
-      double price = double.parse(item.price);
-      int quantity = item.quantity; // Assuming each Shoe has a 'quantity' property
-      total += price * quantity;
-    }
-    return total;
   }
 }

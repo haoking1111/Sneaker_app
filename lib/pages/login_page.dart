@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sneaker_app/global/common/button_lr.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
-import '../global/common/text_field.dart';
+import '../global/common/text_field_lr.dart';
 import 'forgot_pasword_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -116,7 +116,12 @@ class _LoginPageState extends State<LoginPage> {
         'birthdate': '',
         'phonenumber': '',
         'emailaddress': user.email,
-        'address': '',
+        'address' : '',
+        'fullname': '',
+        'city' : '',
+        'provinceregion' : '',
+        'zipcode' : '',
+        'country' : '',
       });
     }
   }

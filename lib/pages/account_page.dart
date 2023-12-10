@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/components/text_box.dart';
+import 'package:sneaker_app/global/common/text_box_inf.dart';
 import 'package:sneaker_app/global/common/logout.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
+import '../global/common/edit_field.dart';
 import 'change_password_page.dart';
 
 class AccountPage extends StatefulWidget {
@@ -22,58 +23,6 @@ class _AccountPageState extends State<AccountPage> {
   //new password
   final String newPassword = '';
 
-  //edit field
-  Future<void> editField(String field) async {
-    String newValue = '';
-    await showDialog(
-      context: context,
-      builder: (context) =>
-          AlertDialog(
-            backgroundColor: Colors.grey[900],
-            title: Text(
-              'Edit ' + field,
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            content: TextField(
-              autofocus: true,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                  hintText: 'Enter new $field',
-                  hintStyle: TextStyle(color: Colors.grey)),
-              onChanged: (value) {
-                newValue = value;
-              },
-            ),
-            actions: [
-              //cancle button
-              TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.white),
-                  )),
-
-              //save button
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(newValue),
-                  child: Text(
-                    'Save',
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ],
-          ),
-    );
-
-    // update in firestore
-    if (newValue
-        .trim()
-        .length > 0) {
-      // only update if there is something in the textField
-      await usersCollection.doc(currentUser.email).update({field: newValue});
-    }
-  }
   //change pasword
   Future<void> changePassword() async {
     try {
@@ -133,7 +82,7 @@ class _AccountPageState extends State<AccountPage> {
                 text: userData['username'],
                 sectionName: 'User Name',
                 onPressed: () {
-                  editField('username');
+                  editField('username', context);
                 },
               ),
 
@@ -142,7 +91,7 @@ class _AccountPageState extends State<AccountPage> {
                 text: userData['birthdate'],
                 sectionName: 'Birth Date',
                 onPressed: () {
-                  editField('birthdate');
+                  editField('birthdate', context);
                 },
               ),
 
@@ -151,7 +100,7 @@ class _AccountPageState extends State<AccountPage> {
                 text: userData['phonenumber'],
                 sectionName: 'Phone Number',
                 onPressed: () {
-                  editField('phonenumber');
+                  editField('phonenumber', context);
                 },
               ),
 
@@ -160,7 +109,7 @@ class _AccountPageState extends State<AccountPage> {
                 text: userData['emailaddress'],
                 sectionName: 'Email Address',
                 onPressed: () {
-                  editField('emailaddress');
+                  editField('emailaddress', context);
                 },
               ),
 
@@ -169,7 +118,7 @@ class _AccountPageState extends State<AccountPage> {
                 text: userData['address'],
                 sectionName: 'Address',
                 onPressed: () {
-                  editField('address');
+                  editField('address', context);
                 },
               ),
 

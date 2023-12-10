@@ -104,6 +104,13 @@ flutter:
      - assets/images/NikeUnisex.png
      - assets/images/NikeWomenFitness.png
      - assets/images/NikeWomenSneaker.png
+     - assets/images/amazonPay.png
+     - assets/images/googlePay.png
+     - assets/images/visaPay.png
+     - assets/images/mastercardPay.png
+     - assets/images/paypalPay.png
+     - assets/images/delivery.png
+     - assets/images/successPay.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

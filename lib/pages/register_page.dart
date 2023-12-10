@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sneaker_app/global/common/button_lr.dart';
-import 'package:sneaker_app/global/common/text_field.dart';
+import 'package:sneaker_app/global/common/text_field_lr.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
     showDialog(
         context: context,
         builder: (context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },
@@ -63,14 +63,19 @@ class _RegisterPageState extends State<RegisterPage> {
               'phonenumber' : '',
               'emailaddress' : _emailController.text.trim(),
               'address' : '',
+              'fullname': '',
+              'city' : '',
+              'provinceregion' : '',
+              'zipcode' : '',
+              'country' : '',
             });
 
       } else {
         showToast(message: 'Confirm password was wrong !');
       }
     } on FirebaseAuthException catch (e) {
-      print('Failed with error code: ${e.code}');
-      print(e.message);
+      // print('Failed with error code: ${e.code}');
+      // print(e.message);
       switch (e.code) {
         case 'email-already-in-use':
           showToast(message: 'The email address is already in use by another account');
@@ -115,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
 
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Text(
                   'Register below with your details !',
                   style: TextStyle(
@@ -123,33 +128,33 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
 
                 //email textfield
                 textFieldLR(_emailController, 'Email', false),
 
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
                 //password textfield
                 textFieldLR(_passwordController, 'Password', true),
 
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
                 //confirm password textfield
                 textFieldLR(_confirmPasswordController, 'Confirm Password', true),
 
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
                 //sign up button
                 buttonLR(() => signUp(), 'Sign Up'),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                 // not a member ? register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Have account?',
                       style: TextStyle(
                           fontWeight: FontWeight.bold
@@ -157,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     GestureDetector(
                       onTap: widget.showLoginPage,
-                      child: Text(
+                      child: const Text(
                         ' Login now',
                         style: TextStyle(
                             color: Colors.blue,

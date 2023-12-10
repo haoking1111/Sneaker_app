@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/pages/product_detail_page.dart';
-import 'package:sneaker_app/pages/single_other_product_page.dart';
 
 import '../models/shoe.dart';
 
