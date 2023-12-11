@@ -20,5 +20,6 @@ void loadingPage(BuildContext context, Widget namePage) {
         builder: (context) => namePage,
       ),
     );
-  });
+  }
+  );
 }

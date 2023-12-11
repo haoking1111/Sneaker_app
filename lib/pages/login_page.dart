@@ -92,6 +92,8 @@ class _LoginPageState extends State<LoginPage> {
          await addUserInfoToFirestore(userCredential.user!);
        }
     } catch (e) {
+      print(e.toString());
+      print(e);
       showToast(message: 'Error');
     } finally {
       //pop loading circle

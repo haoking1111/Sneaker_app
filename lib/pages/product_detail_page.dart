@@ -125,7 +125,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
                                     GestureDetector(
                                       onTap:() {
-                                        print('tap');
                                         setState(() {
                                           quantity++;
                                         });
@@ -142,7 +141,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
                               // price
                               Text(
-                                '\$ ${widget.shoe.price}',
+                                '\$${widget.shoe.price}',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               )

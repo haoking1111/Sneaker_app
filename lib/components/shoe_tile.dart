@@ -10,7 +10,7 @@ class ShoeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 25),
-      width: 280,
+      width: 300,
       decoration: BoxDecoration(
         color: Colors.grey[100],
         borderRadius: BorderRadius.circular(12),
@@ -30,9 +30,9 @@ class ShoeTile extends StatelessWidget {
             child: Text(
               shoe.description,
               overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              maxLines: 3,
               style: TextStyle(color: Colors.grey[600]),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.justify,
             ),
           ),
 
@@ -62,7 +62,10 @@ class ShoeTile extends StatelessWidget {
                     // price
                     Text(
                       '\$' + shoe.price,
-                      style: TextStyle(color: Colors.black.withOpacity(0.5)),
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.7),
+                        fontSize: 16
+                      ),
                     ),
                   ],
                 ),

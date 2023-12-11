@@ -4,6 +4,15 @@ import 'shoe.dart';
 class Cart extends ChangeNotifier{
   // list of shoe for sale
   List<Shoe> shoeShop = [
+
+    Shoe(
+        name: 'Nike Air Force',
+        price: '650',
+        quantity: 1,
+        description: 'The Nike Air Force 1 Low White ‘07 features an all-white leather upper with a perforated toe box and Swoosh overlays. A Nike heel embroidery and white sole completes the design.The Nike Air Force 1 Low White ‘07 originally released in 2007.',
+        imagePath: 'assets/images/NikeAirForce2.png'
+    ),
+
     Shoe(
         name: 'Nike Dunk High',
         price: '540',
@@ -29,18 +38,10 @@ class Cart extends ChangeNotifier{
     ),
 
     Shoe(
-        name: 'Nike Air Force',
-        price: '650',
-        quantity: 1,
-        description: 'The Nike Air Force 1 Low White ‘07 features an all-white leather upper with a perforated toe box and Swoosh overlays. A Nike heel embroidery and white sole completes the design.The Nike Air Force 1 Low White ‘07 originally released in 2007.',
-        imagePath: 'assets/images/NikeAirForce2.png'
-    ),
-
-    Shoe(
         name: 'JBalvin x AirJordan',
         price: '980',
         quantity: 1,
-        description: 'The Jordan 11 Retro Gratitude / Defining Moments (2023) is a nod to the illustrious heritage encapsulated in the Jordan brand. This iconic Jordan 11 model resurfaces with a touch of the famous Defining Moments colorway.',
+        description: 'The Jordan 11 Retro Gratitude Defining Moments (2023) is a nod to the illustrious heritage encapsulated in the Jordan brand. This iconic Jordan 11 model resurfaces with a touch of the famous Defining Moments colorway.',
         imagePath: 'assets/images/JBalvinxAirJordan1High.png'
     ),
 
