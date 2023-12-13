@@ -8,6 +8,7 @@ import 'package:sneaker_app/pages/privacy_page.dart';
 import 'package:sneaker_app/pages/purchase_history_page.dart';
 
 import '../global/common/logout.dart';
+import 'help_and_support_page.dart';
 import 'settings_page.dart';
 
 class AccountPage extends StatelessWidget {
@@ -59,7 +60,7 @@ class AccountPage extends StatelessWidget {
               ),
 
               SizedBox(
-                height: 40,
+                height: 30,
               ),
 
               //
@@ -79,7 +80,9 @@ class AccountPage extends StatelessWidget {
               //
               ProfileListItem(() => null, FontAwesomeIcons.userPlus, 'Invite a Friend'),
               //
-              ProfileListItem(() => null, FontAwesomeIcons.solidCircleQuestion, 'Help & Support'),
+              ProfileListItem(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HelpAndSupportPage(),));
+              }, FontAwesomeIcons.solidCircleQuestion, 'Help & Support'),
 
               // username
 

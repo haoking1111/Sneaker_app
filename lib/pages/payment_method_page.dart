@@ -48,13 +48,13 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
         ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.grey[300],
+        // backgroundColor: Colors.grey[300],
       ),
       body: Consumer<Cart>(
         builder: (context, value, child) => SingleChildScrollView(
           child: SafeArea(
             child: Container(
-              color: Colors.grey[300],
+              // color: Colors.grey[300],
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Center(
@@ -63,7 +63,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                       SizedBox(
                         height: 40,
                       ),
-          
+
                       // Amazon Payment
                       Container(
                         width: size.width,
@@ -114,11 +114,11 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                           ),
                         ),
                       ),
-          
+
                       SizedBox(
                         height: 20,
                       ),
-          
+
                       //Card Pay
                       Container(
                         width: size.width,
@@ -174,11 +174,11 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                           ),
                         ),
                       ),
-          
+
                       SizedBox(
                         height: 20,
                       ),
-          
+
                       //Paypal payment
                       Container(
                         width: size.width,
@@ -229,11 +229,11 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                           ),
                         ),
                       ),
-          
+
                       SizedBox(
                         height: 20,
                       ),
-          
+
                       //Google payment
                       Container(
                         width: size.width,
@@ -286,7 +286,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                       SizedBox(
                         height: 90,
                       ),
-          
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -306,7 +306,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                           ),
                         ],
                       ),
-          
+
                       SizedBox(
                         height: 15,
                       ),
@@ -329,12 +329,12 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                           ),
                         ],
                       ),
-          
+
                       Divider(
                         height: 15,
                         color: Colors.black,
                       ),
-          
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -357,7 +357,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                       SizedBox(
                         height: 70,
                       ),
-          
+
                       buttonLR(() {
                         loadingPage(context, ShippingAddress());
                       }, 'Confirm Payment')
