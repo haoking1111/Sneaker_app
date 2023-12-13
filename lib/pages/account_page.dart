@@ -1,39 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/global/common/text_box_inf.dart';
-import 'package:sneaker_app/global/common/logout.dart';
-import 'package:sneaker_app/global/common/toast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sneaker_app/global/common/loading_p.dart';
+import 'package:sneaker_app/pages/account_details_page.dart';
+import 'package:sneaker_app/pages/privacy_page.dart';
+import 'package:sneaker_app/pages/purchase_history_page.dart';
 
-import '../global/common/edit_field.dart';
-import 'change_password_page.dart';
+import '../global/common/logout.dart';
+import 'settings_page.dart';
 
-class AccountPage extends StatefulWidget {
-  @override
-  State<AccountPage> createState() => _AccountPageState();
-}
+class AccountPage extends StatelessWidget {
+  AccountPage({super.key});
 
-class _AccountPageState extends State<AccountPage> {
   //user
   final currentUser = FirebaseAuth.instance.currentUser!;
-
-  //all user
-  final usersCollection = FirebaseFirestore.instance.collection("users");
-
-  //new password
-  final String newPassword = '';
-
-  //change pasword
-  Future<void> changePassword() async {
-    try {
-      await currentUser.updatePassword(newPassword);
-      FirebaseAuth.instance.signOut();
-      showToast(message: 'Your password has been changed. Please log in again.');
-    } catch (e) {
-      print(e);
-      showToast(message: 'Failed to change password. Please try again.');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,112 +33,99 @@ class _AccountPageState extends State<AccountPage> {
             children: [
               //account pic
               Icon(
-                Icons.person,
-                size: 72,
+                FontAwesomeIcons.solidCircleUser,
+                size: 80,
               ),
 
               SizedBox(
                 height: 10,
               ),
 
-              // user email
+              // user
               Text(
                 userData['username'],
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey[700]),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 17),
               ),
 
-              // user detail
-              Padding(
-                padding: const EdgeInsets.only(left: 25.0),
-                child: Text(
-                  'My Details',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
+              // user email
+              Text(
+                userData['emailaddress'],
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey[900]),
               ),
+
+              SizedBox(
+                height: 40,
+              ),
+
+              //
+              ProfileListItem(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PrivacyPage(),));
+              }, FontAwesomeIcons.userShield, 'Privacy'),
+              //
+              ProfileListItem(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PurchaseHistoryPage(),));
+              }, FontAwesomeIcons.clockRotateLeft, 'Purchase History'),
+              //
+              ProfileListItem(() => null, FontAwesomeIcons.wallet, 'Billing Details'),
+              //
+              ProfileListItem(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage(),));
+              }, FontAwesomeIcons.gear, 'Settings'),
+              //
+              ProfileListItem(() => null, FontAwesomeIcons.userPlus, 'Invite a Friend'),
+              //
+              ProfileListItem(() => null, FontAwesomeIcons.solidCircleQuestion, 'Help & Support'),
 
               // username
-              MyTextBox(
-                text: userData['username'],
-                sectionName: 'User Name',
-                onPressed: () {
-                  editField('username', context);
-                },
-              ),
-
-              //birthday
-              MyTextBox(
-                text: userData['birthdate'],
-                sectionName: 'Birth Date',
-                onPressed: () {
-                  editField('birthdate', context);
-                },
-              ),
-
-              //phonenumber
-              MyTextBox(
-                text: userData['phonenumber'],
-                sectionName: 'Phone Number',
-                onPressed: () {
-                  editField('phonenumber', context);
-                },
-              ),
-
-              //email address
-              MyTextBox(
-                text: userData['emailaddress'],
-                sectionName: 'Email Address',
-                onPressed: () {
-                  editField('emailaddress', context);
-                },
-              ),
-
-              //address
-              MyTextBox(
-                text: userData['address'],
-                sectionName: 'Address',
-                onPressed: () {
-                  editField('address', context);
-                },
-              ),
-
-              // change password
-              MyTextBox(
-                  text: '*********',
-                  sectionName: 'Change Password',
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ChangPassWordPage(),));
-                  },
-              ),
 
               const Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 25.0, right: 25.0),
-                child: Divider(color: Colors.white,),
-              ),
-
-              Padding(
-                padding: EdgeInsets.only(right: 20, left: 35, bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        'Logout',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-
-                    IconButton(
-                        onPressed: () {
-                          logout(context);
-                        },
-                        icon: Icon(Icons.logout,)
-                    ),
-                  ],
+                padding: EdgeInsets.only(left:25, right: 25, bottom: 10),
+                child: Divider(
+                  color: Colors.white,
                 ),
               ),
+
+              //
+              GestureDetector(
+                onTap: () {
+                  logout(context);
+                },
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.arrowRightFromBracket,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            'Logout',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ],
           );
         } else if (snapshot.hasError) {
@@ -169,6 +137,45 @@ class _AccountPageState extends State<AccountPage> {
           child: CircularProgressIndicator(),
         );
       },
+    );
+  }
+
+  Widget ProfileListItem(Function() nameFuntion, IconData icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
+      child: GestureDetector(
+        onTap: nameFuntion,
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 18,
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  text,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                ),
+                Spacer(),
+                Icon(
+                  FontAwesomeIcons.angleRight,
+                  size: 18,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

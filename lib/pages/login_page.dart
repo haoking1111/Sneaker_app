@@ -95,8 +95,8 @@ class _LoginPageState extends State<LoginPage> {
       print(e.toString());
       print(e);
       showToast(message: 'Error');
-    } finally {
-      //pop loading circle
+    }finally {
+      // Close loading circle
       Navigator.of(context).pop();
     }
   }
