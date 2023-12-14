@@ -6,7 +6,9 @@ class PurchaseHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        backgroundColor: Colors.grey[300],
         title: Text('Purchase Histopry', style: TextStyle(fontWeight: FontWeight.w500),),
         centerTitle: true,
       ),
