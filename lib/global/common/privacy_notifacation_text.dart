@@ -21,7 +21,7 @@ class PrivacyNotificationText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 300,
+          width: 290,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

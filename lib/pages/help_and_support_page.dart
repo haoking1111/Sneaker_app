@@ -35,7 +35,7 @@ class HelpAndSupportPage extends StatelessWidget {
 
               const Padding(
                 padding:
-                EdgeInsets.only(left: 25.0, right: 25.0, bottom: 20),
+                EdgeInsets.only(left: 10.0, right: 10.0, bottom: 20),
                 child: Divider(
                   color: Colors.white,
                 ),
@@ -45,7 +45,7 @@ class HelpAndSupportPage extends StatelessWidget {
 
               const Padding(
                 padding:
-                EdgeInsets.only(left: 25.0, right: 25.0, bottom: 20),
+                EdgeInsets.only(left: 10.0, right: 10.0, bottom: 20),
                 child: Divider(
                   color: Colors.white,
                 ),
@@ -53,6 +53,13 @@ class HelpAndSupportPage extends StatelessWidget {
 
               HelpAndSupportText(() => null, FontAwesomeIcons.solidCircleQuestion, 'Browse FAQs'),
 
+              const Padding(
+                padding:
+                EdgeInsets.only(left: 10.0, right: 10.0, bottom: 20),
+                child: Divider(
+                  color: Colors.white,
+                ),
+              ),
             ],
           ),
         ),

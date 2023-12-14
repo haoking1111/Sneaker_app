@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/global/common/button_lr.dart';
-import 'package:sneaker_app/global/common/loading_p.dart';
 import 'package:sneaker_app/global/common/text_box_shipping_address.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 

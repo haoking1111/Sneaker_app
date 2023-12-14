@@ -69,7 +69,7 @@ class _OrderConfirmPageState extends State<OrderConfirmPage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black12, blurRadius: 4, spreadRadius: 2)
+                          color: Colors.black12, blurRadius: 2, spreadRadius: 2)
                     ]
                 ),
                 child: StreamBuilder<DocumentSnapshot>(
@@ -172,7 +172,7 @@ class _OrderConfirmPageState extends State<OrderConfirmPage> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black12, blurRadius: 4, spreadRadius: 2),
+                          color: Colors.black12, blurRadius: 2, spreadRadius: 2),
                     ]
                 ),
                 child: Padding(
@@ -211,7 +211,7 @@ class _OrderConfirmPageState extends State<OrderConfirmPage> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black12, blurRadius: 4, spreadRadius: 2),
+                              color: Colors.black12, blurRadius: 2, spreadRadius: 2),
                         ]
                     ),
                     child: Padding(
@@ -240,7 +240,7 @@ class _OrderConfirmPageState extends State<OrderConfirmPage> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black12, blurRadius: 4, spreadRadius: 2),
+                              color: Colors.black12, blurRadius: 2, spreadRadius: 2),
                         ]
                     ),
                     child: Padding(

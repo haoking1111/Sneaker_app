@@ -9,6 +9,7 @@ class OrderSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.grey[300],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
