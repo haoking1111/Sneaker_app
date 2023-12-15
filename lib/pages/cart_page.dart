@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sneaker_app/global/common/loading_p.dart';
 import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/pages/payment_method_page.dart';
-
 import '../components/cart_item.dart';
 import '../models/shoe.dart';
 

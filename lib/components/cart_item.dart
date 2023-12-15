@@ -4,20 +4,16 @@ import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/models/shoe.dart';
 
 class CartItem extends StatefulWidget {
-  Shoe shoe;
+  final Shoe shoe;
 
 
   CartItem({super.key, required this.shoe});
 
   @override
-  State<StatefulWidget> createState() {
-    return _CartItemState();
-  }
-
+  State<CartItem> createState() => _CartItemState();
 }
 
-class _CartItemState extends State<CartItem>{
-
+class _CartItemState extends State<CartItem> {
   //remove item from cart
   void removeItemFromCart() {
     Provider.of<Cart>(context, listen: false).removeItemFromCart(widget.shoe);
@@ -53,5 +49,4 @@ class _CartItemState extends State<CartItem>{
       ),
     );
   }
-
 }

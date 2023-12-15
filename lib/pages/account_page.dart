@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sneaker_app/global/common/loading_p.dart';
-import 'package:sneaker_app/pages/account_details_page.dart';
 import 'package:sneaker_app/pages/privacy_page.dart';
 import 'package:sneaker_app/pages/purchase_history_page.dart';
 

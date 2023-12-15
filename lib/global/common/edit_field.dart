@@ -10,7 +10,6 @@ Future<void> editField(String field, context) async {
   final usersCollection = FirebaseFirestore.instance.collection("users");
 
   //new password
-  final String newPassword = '';
   String newValue = '';
   await showDialog(
     context: context,

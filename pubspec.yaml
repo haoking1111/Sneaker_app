@@ -46,6 +46,7 @@ dependencies:
   google_sign_in: ^6.1.6
   flutter_native_splash: ^2.3.6
   flutter_credit_card: ^4.0.1
+  google_maps_flutter: ^2.5.0
 
 #flutter_native_splash:
 #  android: true

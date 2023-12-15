@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/components/bottom_nav_bar.dart';
-import 'package:sneaker_app/global/common/toast.dart';
-import 'package:sneaker_app/pages/account_details_page.dart';
 import 'package:sneaker_app/pages/account_page.dart';
 import 'package:sneaker_app/pages/shop_page.dart';
 import '../global/common/logout.dart';

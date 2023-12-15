@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -24,22 +25,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       await FirebaseAuth.instance.sendPasswordResetEmail(
           email: _emailController.text.trim()
       );
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text('Password reset link sent! Check your email'),
-          );
-        },);
+      showToast(message: 'Password reset link sent! Check your email');
     } on FirebaseAuthException catch (e) {
       print(e);
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(e.message.toString()),
-          );
-        },);
+      showToast(message: e.message.toString());
     }
   }
   //Password reset link sent! Check your email
@@ -49,14 +38,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.grey[400],
         elevation: 0,
-        title: Text('Forgot Password',style: TextStyle(color: Colors.white),),
+        title: Text('Forgot Password', style: TextStyle(fontWeight: FontWeight.w500),),
         centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          
+          Icon(Icons.lock_reset_outlined, size: 150,),
+          SizedBox(height: 10,),
+          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Text(
@@ -71,7 +64,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
           SizedBox(height: 10,),
 
-          //email textfield
+          //email text-field
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: TextField(

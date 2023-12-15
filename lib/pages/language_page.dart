@@ -9,6 +9,12 @@ class LanguagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> itemLanguage = [
       'English',
+      'Chinese',
+      'Hindi',
+      'Spanish',
+      'French',
+      'Bengali',
+      'Japanese',
       'Vietnamese',
 
     ];

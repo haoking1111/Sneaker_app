@@ -6,7 +6,6 @@ import 'package:sneaker_app/global/common/text_box_shipping_address.dart';
 import 'package:sneaker_app/global/common/toast.dart';
 
 import '../global/common/edit_field.dart';
-import 'order_confirm_page.dart';
 
 class ShippingAddressSettingPage extends StatefulWidget {
   const ShippingAddressSettingPage({super.key});

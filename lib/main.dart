@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/pages/intro_page.dart';
-import 'package:sneaker_app/pages/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

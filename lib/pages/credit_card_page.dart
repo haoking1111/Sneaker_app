@@ -96,10 +96,10 @@ class _CreditCardPageState extends State<CreditCardPage> {
                         padding: const EdgeInsets.all(20.0),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              primary: Color(0xff1b447b)
 
                           ),
                           child: Center(

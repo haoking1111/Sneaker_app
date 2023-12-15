@@ -9,7 +9,7 @@ class PurchaseHistoryPage extends StatelessWidget {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
-        title: Text('Purchase Histopry', style: TextStyle(fontWeight: FontWeight.w500),),
+        title: Text('Purchase History', style: TextStyle(fontWeight: FontWeight.w500),),
         centerTitle: true,
       ),
       body: Center(

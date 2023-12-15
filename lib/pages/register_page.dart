@@ -70,8 +70,11 @@ class _RegisterPageState extends State<RegisterPage> {
               'country' : '',
             });
 
+        // show success message
+        showToast(message: 'Sign Up Success');
+
       } else {
-        showToast(message: 'Confirm password was wrong !');
+        showToast(message: 'Confirm password was wrong!');
       }
     } on FirebaseAuthException catch (e) {
       // print('Failed with error code: ${e.code}');

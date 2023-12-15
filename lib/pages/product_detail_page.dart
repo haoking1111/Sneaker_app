@@ -5,7 +5,7 @@ import 'package:sneaker_app/models/cart.dart';
 import 'package:sneaker_app/models/shoe.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  Shoe shoe;
+  final Shoe shoe;
 
   ProductDetailPage({super.key, required this.shoe});
 

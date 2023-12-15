@@ -2,16 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sneaker_app/pages/shipping_address_page.dart';
 import 'package:sneaker_app/pages/shipping_address_setting_page.dart';
 
 import '../global/common/edit_field.dart';
-import '../global/common/logout.dart';
 import '../global/common/text_box_inf.dart';
 import '../global/common/toast.dart';
 import 'change_password_page.dart';
 import 'credit_card_page.dart';
 import 'language_page.dart';
+import 'maps_page.dart';
 import 'notifications_page.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -130,7 +129,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
 
-                    SettingItems(() => null, FontAwesomeIcons.locationDot, 'Location Setting'),
+                    SettingItems(() {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MapsPage(),));
+                    }, FontAwesomeIcons.locationDot, 'Location Setting'),
 
                     SettingItems(() {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationsPage(),));

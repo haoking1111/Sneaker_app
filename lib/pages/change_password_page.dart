@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sneaker_app/global/common/button_lr.dart';
 import 'package:sneaker_app/global/common/text_field_lr.dart';
 import 'package:sneaker_app/global/common/toast.dart';
-import 'package:sneaker_app/pages/login_page.dart';
 
 class ChangPassWordPage extends StatefulWidget {
    ChangPassWordPage({super.key});
@@ -99,7 +98,7 @@ class _ChangPassWordPageState extends State<ChangPassWordPage> {
                 height: 15,
               ),
           
-              //newPassword textfield
+              //newPassword text-field
               textFieldLR(_newPasswordController, 'New Password', true),
           
               SizedBox(

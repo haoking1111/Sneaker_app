@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/global/common/button_lr.dart';
 import 'package:sneaker_app/pages/intro_page.dart';
-import 'package:sneaker_app/pages/shop_page.dart';
 
 class OrderSuccessPage extends StatelessWidget {
   const OrderSuccessPage({super.key});
