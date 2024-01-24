@@ -34,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
+    if (!mounted) return;
     //loading circle
     showDialog(
         context: context,
@@ -77,8 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
         showToast(message: 'Confirm password was wrong!');
       }
     } on FirebaseAuthException catch (e) {
-      // print('Failed with error code: ${e.code}');
-      // print(e.message);
+      print('Failed with error code: ${e.code}');
+      print(e.message);
       switch (e.code) {
         case 'email-already-in-use':
           showToast(message: 'The email address is already in use by another account');
